@@ -79,17 +79,19 @@
 
 
 
-<meta name="description" content="Be just to all, but trust not all.">
+<meta name="description" content="MarkDwon 语法标题使用#来表示，前面有几个就是几级标题 for(int i &#x3D; 0; i &lt; s.size(); ++i) {     cout &lt;&lt; &quot;mytest&quot; &lt;&lt; endl; }">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mytest2">
+<meta property="og:title" content="test for markdown">
 <meta property="og:url" content="http://yoursite.com/2020/06/15/mytest2/index.html">
 <meta property="og:site_name" content="cm&#39; blog">
-<meta property="og:description" content="Be just to all, but trust not all.">
+<meta property="og:description" content="MarkDwon 语法标题使用#来表示，前面有几个就是几级标题 for(int i &#x3D; 0; i &lt; s.size(); ++i) {     cout &lt;&lt; &quot;mytest&quot; &lt;&lt; endl; }">
+<meta property="og:image" content="https://github.com/nocannobbb/Pictures/blob/master/big_face_cat.jpg">
 <meta property="article:published_time" content="2020-06-15T06:01:12.000Z">
-<meta property="article:modified_time" content="2020-06-15T06:01:12.625Z">
+<meta property="article:modified_time" content="2020-06-16T06:18:23.493Z">
 <meta property="article:author" content="Meng Chen">
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/nocannobbb/Pictures/blob/master/big_face_cat.jpg">
 
 
 
@@ -125,7 +127,7 @@
 
 
 
-  <title>mytest2 | cm' blog</title>
+  <title>test for markdown | cm' blog</title>
   
 
 
@@ -269,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mytest2</h1>
+          <h1 class="post-title" itemprop="name headline">test for markdown</h1>
         
 
         <div class="post-meta">
@@ -291,6 +293,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/markdown/" itemprop="url" rel="index">
+                    <span itemprop="name">markdown</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -319,7 +343,31 @@
       
 
       
-        
+        <h1 id="MarkDwon-语法"><a href="#MarkDwon-语法" class="headerlink" title="MarkDwon 语法"></a>MarkDwon 语法</h1><h2 id="标题使用-来表示，前面有几个就是几级标题"><a href="#标题使用-来表示，前面有几个就是几级标题" class="headerlink" title="标题使用#来表示，前面有几个就是几级标题"></a>标题使用#来表示，前面有几个就是几级标题</h2><p><img src="https://github.com/nocannobbb/Pictures/blob/master/big_face_cat.jpg" alt="for test"></p>
+<pre><code>for(int i = 0; i &lt; s.size(); ++i)
+{
+    cout &lt;&lt; &quot;mytest&quot; &lt;&lt; endl;
+}</code></pre><a id="more"></a>
+
+<blockquote>
+<p>Currently, it is not smooth to update NexT theme from pulling or downloading new releases. It is quite often running into conflict status when updating NexT theme via git pull, or need to merge configurations manually when upgrading to new releases.</p>
+</blockquote>
+<blockquote>
+<p>At present, NexT encourages users to store some options in site’s /_config.yml and other options in theme’s /themes/next/_config.yml. This approach is applicable, but has some drawbacks:</p>
+</blockquote>
+<p>Configurations are splitted into two pieces<br>Users may be confused which place should be for options<br>In order to resolve this issue, NexT provides the following two solutions.</p>
+<p>Option 1: Hexo-Way<br>With this way, all your configurations locate in main Hexo config file (/_config.yml), you don’t need to touch /themes/next/_config.yml or create any new files. But you must preserve double spaces indents within theme_config option.</p>
+<p>If there are any new options in new releases, you just need to copy those options from /themes/next/_config.yml, paste into /_config.yml and set their values to whatever you want.</p>
+<p>Usage<br>Please confirm that the /source/_data/next.yml file does not exist (delete it if exists).<br>Copy needed NexT theme options from theme’s /themes/next/_config.yml into /_config.yml, then<br>2.1. Move all this settings to the right with two spaces (in Visual Studio Code: select all strings, CTRL + ]).<br>2.2. Add theme_config: parameter above all this settings.<br>Useful links<br>Hexo Configuration<br>Hexo Pull #757<br>Option 2: NexT-Way<br>With this way, you can put all your configurations into one place (/source/_data/next.yml), you don’t need to touch /themes/next/_config.yml. But option may not accurately procces all hexo external libraries with their additional options (for example, hexo-server module options may be readed only in default hexo config).</p>
+<p>If there are any new options in new releases, you just need to copy those options from /themes/next/_config.yml, paste into /source/_data/next.yml and set their values to whatever you want.</p>
+<p>This method relies on Hexo Data files. Because Data files is introduced in Hexo 3, so you need upgrade Hexo to 3.0 (or above) to use this feature.</p>
+<p>Usage<br>Please ensure you are using Hexo 3 (or above).<br>Create an file named next.yml in site’s /source/_data directory (create _data directory if it does not exist).<br>And after that steps there are 2 variants, need to choose only one of them and resume next steps.</p>
+<p>Variant 1: override: false (default):</p>
+<p>Check your override option in default NexT config, it must set on false.<br>In next.yml it must not be defined or set on false too.<br>Copy needed options from both site’s /_config.yml and theme’s /themes/next/_config.yml into /source/_data/next.yml.<br>Variant 2: override: true:</p>
+<blockquote>
+<p>In next.yml set override option on true.<br>Copy all NexT theme options from theme’s /themes/next/_config.yml into /source/_data/next.yml.<br>Then, in main site’s /_config.yml need to define theme: next option (and if needed, source_dir: source).<br>Use standard parameters to start server, generate or deploy (hexo clean &amp;&amp; hexo g -d &amp;&amp; hexo s).</p>
+</blockquote>
+
       
     </div>
     
@@ -413,8 +461,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -444,7 +501,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -478,6 +535,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MarkDwon-语法"><span class="nav-number">1.</span> <span class="nav-text">MarkDwon 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标题使用-来表示，前面有几个就是几级标题"><span class="nav-number">1.1.</span> <span class="nav-text">标题使用#来表示，前面有几个就是几级标题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
