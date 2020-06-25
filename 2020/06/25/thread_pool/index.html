@@ -353,9 +353,16 @@
 </blockquote>
 <h2 id="一、c-基础知识"><a href="#一、c-基础知识" class="headerlink" title="一、c++基础知识"></a>一、c++基础知识</h2><h4 id="匿名函数-lamda"><a href="#匿名函数-lamda" class="headerlink" title="匿名函数(lamda)"></a>匿名函数(lamda)</h4><p><strong><a href="parameters">capture</a>-&gt;return-type{function-body}</strong></p>
 <ol>
-<li><p>[capture]:  以什么样的形式接收参数</p>
-<figure class="highlight plain"><figcaption><span> </span><a href="//不截取任何变量,试图在Lambda内使用任何外部变量都是错误的（全局变量除外）." target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs []"><code class="language-hljs []">[&]         &#x2F;&#x2F;截取外部作用域中所有变量，并作为引用在函数体中使用<br>[&#x3D;]         &#x2F;&#x2F;截取外部作用域中所有变量，并拷贝一份在函数体中使用<br>[&#x3D;, &foo]   &#x2F;&#x2F;截取外部作用域中所有变量，并拷贝一份在函数体中使用，但是对foo变量使用引用<br>[bar]       &#x2F;&#x2F;截取bar变量并且拷贝一份在函数体重使用，同时不截取其他变量<br>[this]      &#x2F;&#x2F;截取当前类中的this指针。如果已经使用了&或者&#x3D;就默认添加此选项。<br>-----------------------------<br>[x, &y]     &#x2F;&#x2F;x 按值捕获, y 按引用捕获<br>[&, x]      &#x2F;&#x2F;x显式地按值捕获. 其它变量按引用捕获<br>[&#x3D;, &z]     &#x2F;&#x2F;z按引用捕获. 其它变量按值捕获<br></code></pre></td></tr></table></figure>
+<li>[capture]:  以什么样的形式接收参数<pre class=" language-[]"><code class="language-[]">[&]         //截取外部作用域中所有变量，并作为引用在函数体中使用
+[=]         //截取外部作用域中所有变量，并拷贝一份在函数体中使用
+[=, &foo]   //截取外部作用域中所有变量，并拷贝一份在函数体中使用，但是对foo变量使用引用
+[bar]       //截取bar变量并且拷贝一份在函数体重使用，同时不截取其他变量
+[this]      //截取当前类中的this指针。如果已经使用了&或者=就默认添加此选项。</code></pre>
 </li>
+</ol>
+<hr>
+<p>[x, &amp;y]     //x 按值捕获, y 按引用捕获<br>[&amp;, x]      //x显式地按值捕获. 其它变量按引用捕获<br>[=, &amp;z]     //z按引用捕获. 其它变量按值捕获```</p>
+<ol start="2">
 <li><p>(parameters):  匿名函数的具体传参</p>
 <blockquote>
 <p>如果没有传参，圆括号也可以省略，变成[capture]-&gt;return-type{function-body}</p>
@@ -367,9 +374,12 @@
 </blockquote>
 </li>
 <li><p>eg：</p>
-<figure class="highlight plain"><figcaption><span>x, int y) &#123; return x + y; &#125;</span><a href="//">隐式返回类型 </a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs [](int"><code class="language-hljs [](int">[](int& x) &#123; ++x; &#125; &#x2F;&#x2F; 没有return语句 -> lambda 函数的返回类型是'void' <br>[]() &#123; ++global_x; &#125; &#x2F;&#x2F; 没有参数,仅访问某个全局变量 <br>[]&#123; ++global_x; &#125; &#x2F;&#x2F; 与上一个相同,省略了()<br>[](int x, int y) -> int &#123; int z &#x3D; x + y; return z; &#125;<br></code></pre></td></tr></table></figure>
+<pre class=" language-[](int"><code class="language-[](int">[](int& x) { ++x; } // 没有return语句 -> lambda 函数的返回类型是'void' 
+[]() { ++global_x; } // 没有参数,仅访问某个全局变量 
+[]{ ++global_x; } // 与上一个相同,省略了()
+[](int x, int y) -> int { int z = x + y; return z; }```
 
-
+</code></pre>
 </li>
 </ol>
 <h4 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h4><p>c++的大括号主要是做代码块的划分，功能如下：</p>
