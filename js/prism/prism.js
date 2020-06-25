@@ -1,5 +1,5 @@
 /* PrismJS 1.20.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+c+cpp+css-extras+git+go+java+js-templates+json+json5+latex+makefile+markdown+markup-templating+php+python+r+ruby+sql+yaml&plugins=line-highlight+line-numbers+file-highlight+show-language+highlight-keywords+inline-color+command-line+normalize-whitespace+data-uri-highlight+toolbar+copy-to-clipboard+download-button+match-braces+treeview */
+https://prismjs.com/download.html#themes=prism-funky&languages=markup+css+clike+javascript+c+cpp+css-extras+git+go+java+js-templates+json+json5+latex+makefile+markdown+markup-templating+php+python+r+ruby+sql+yaml&plugins=line-highlight+line-numbers+file-highlight+show-language+highlight-keywords+inline-color+command-line+normalize-whitespace+data-uri-highlight+toolbar+copy-to-clipboard+download-button+match-braces+treeview */
 var _self = (typeof window !== 'undefined')
 	? window   // if in browser
 	: (
