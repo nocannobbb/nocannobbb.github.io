@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="test,excitement," />
+  <meta name="keywords" content="c++, 多线程," />
 
 
 
@@ -79,18 +79,19 @@
 
 
 
-<meta name="description" content="for test and demo use">
+<meta name="description" content="如何编写c++版本的线程池借鉴于 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;lzpong&#x2F;p&#x2F;6397997.html   在编写线程池之前，我们首先需要了解为什么需要线程池？在传统的c++多线程中，多线程的编写都是使用默认的方法，也就是创建，执行，销毁这个过程。我们可以想象，使用默认的方法，在线程执行时间远大于创建与销毁时间时，会比较合理，因为创建销毁这个过程所占用的时间不多。  但相反的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我的第一个博客">
-<meta property="og:url" content="http://yoursite.com/2020/06/13/my%20first%20blog/index.html">
+<meta property="og:title" content="c++线程池">
+<meta property="og:url" content="http://yoursite.com/2020/06/25/thread_pool/index.html">
 <meta property="og:site_name" content="cm&#39; blog">
-<meta property="og:description" content="for test and demo use">
-<meta property="article:published_time" content="2020-06-13T13:53:30.000Z">
-<meta property="article:modified_time" content="2020-06-13T16:31:45.006Z">
+<meta property="og:description" content="如何编写c++版本的线程池借鉴于 https:&#x2F;&#x2F;www.cnblogs.com&#x2F;lzpong&#x2F;p&#x2F;6397997.html   在编写线程池之前，我们首先需要了解为什么需要线程池？在传统的c++多线程中，多线程的编写都是使用默认的方法，也就是创建，执行，销毁这个过程。我们可以想象，使用默认的方法，在线程执行时间远大于创建与销毁时间时，会比较合理，因为创建销毁这个过程所占用的时间不多。  但相反的">
+<meta property="og:image" content="https://github.com/nocannobbb/Pictures/raw/master/c%2B%2B%20big%20bucket.png">
+<meta property="article:published_time" content="2020-06-25T13:42:12.000Z">
+<meta property="article:modified_time" content="2020-06-25T15:12:53.848Z">
 <meta property="article:author" content="Meng Chen">
-<meta property="article:tag" content="test">
-<meta property="article:tag" content="excitement">
+<meta property="article:tag" content="c++, 多线程">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/nocannobbb/Pictures/raw/master/c%2B%2B%20big%20bucket.png">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/13/my first blog/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/06/25/thread_pool/"/>
 
 
 
 
 
-  <title>我的第一个博客 | cm' blog</title>
+  <title>c++线程池 | cm' blog</title>
   
 
 
@@ -253,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/13/my%20first%20blog/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/25/thread_pool/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Meng Chen">
@@ -270,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">我的第一个博客</h1>
+          <h1 class="post-title" itemprop="name headline">c++线程池</h1>
         
 
         <div class="post-meta">
@@ -282,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-13T21:53:30+08:00">
-                2020-06-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-25T21:42:12+08:00">
+                2020-06-25
               </time>
             
 
@@ -305,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">Algorithm</span>
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
                   </a>
                 </span>
 
@@ -342,7 +343,41 @@
       
 
       
-        <p>for test and demo use</p>
+        <h1 id="如何编写c-版本的线程池"><a href="#如何编写c-版本的线程池" class="headerlink" title="如何编写c++版本的线程池"></a>如何编写c++版本的线程池</h1><p>借鉴于 <a href="https://www.cnblogs.com/lzpong/p/6397997.html" target="_blank" rel="noopener">https://www.cnblogs.com/lzpong/p/6397997.html</a></p>
+<blockquote>
+<p> 在编写线程池之前，我们首先需要了解为什么需要线程池？<br>在传统的c++多线程中，多线程的编写都是使用默认的方法，也就是<strong>创建，执行，销毁</strong>这个过程。我们可以想象，使用默认的方法，在线程执行时间远大于创建与销毁时间时，会比较合理，因为创建销毁这个过程所占用的时间不多。  但相反的来说，若每个线程执行的时间很短，而应用在短时间内拥有较大并发量时，线程会不断地进行创建与销毁，<strong>占用大量的时间</strong>，这个时候，传统的线程管理方法就不再适用, 我们就需要使用线程池来进行线程的管理。</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p><del>当然也可以是用来练习c++</del></p>
+</blockquote>
+<h2 id="一、c-基础知识"><a href="#一、c-基础知识" class="headerlink" title="一、c++基础知识"></a>一、c++基础知识</h2><h4 id="匿名函数-lamda"><a href="#匿名函数-lamda" class="headerlink" title="匿名函数(lamda)"></a>匿名函数(lamda)</h4><p><strong><a href="parameters">capture</a>-&gt;return-type{function-body}</strong></p>
+<ol>
+<li><p>[capture]:  以什么样的形式接收参数</p>
+<figure class="highlight plain"><figcaption><span> </span><a href="//不截取任何变量,试图在Lambda内使用任何外部变量都是错误的（全局变量除外）." target="_blank" rel="noopener">link</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre class=" language-hljs []"><code class="language-hljs []">[&]         &#x2F;&#x2F;截取外部作用域中所有变量，并作为引用在函数体中使用<br>[&#x3D;]         &#x2F;&#x2F;截取外部作用域中所有变量，并拷贝一份在函数体中使用<br>[&#x3D;, &foo]   &#x2F;&#x2F;截取外部作用域中所有变量，并拷贝一份在函数体中使用，但是对foo变量使用引用<br>[bar]       &#x2F;&#x2F;截取bar变量并且拷贝一份在函数体重使用，同时不截取其他变量<br>[this]      &#x2F;&#x2F;截取当前类中的this指针。如果已经使用了&或者&#x3D;就默认添加此选项。<br>-----------------------------<br>[x, &y]     &#x2F;&#x2F;x 按值捕获, y 按引用捕获<br>[&, x]      &#x2F;&#x2F;x显式地按值捕获. 其它变量按引用捕获<br>[&#x3D;, &z]     &#x2F;&#x2F;z按引用捕获. 其它变量按值捕获<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>(parameters):  匿名函数的具体传参</p>
+<blockquote>
+<p>如果没有传参，圆括号也可以省略，变成[capture]-&gt;return-type{function-body}</p>
+</blockquote>
+</li>
+<li><p>return-type:  匿名函数的返回值类型</p>
+<blockquote>
+<p>如果返回值为void类型，或者函数里面只有一个返回语句，则return-type可以省略，变为<a href="parameters">capture</a>{function-body}</p>
+</blockquote>
+</li>
+<li><p>eg：</p>
+<figure class="highlight plain"><figcaption><span>x, int y) &#123; return x + y; &#125;</span><a href="//">隐式返回类型 </a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre class=" language-hljs [](int"><code class="language-hljs [](int">[](int& x) &#123; ++x; &#125; &#x2F;&#x2F; 没有return语句 -> lambda 函数的返回类型是'void' <br>[]() &#123; ++global_x; &#125; &#x2F;&#x2F; 没有参数,仅访问某个全局变量 <br>[]&#123; ++global_x; &#125; &#x2F;&#x2F; 与上一个相同,省略了()<br>[](int x, int y) -> int &#123; int z &#x3D; x + y; return z; &#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h4 id="大括号"><a href="#大括号" class="headerlink" title="大括号"></a>大括号</h4><p>c++的大括号主要是做代码块的划分，功能如下：</p>
+<ol>
+<li>能够让代码变得更整洁易读</li>
+<li>更好的管理局部变量，因为局部变量的生命周期存在于大括号内</li>
+<li>eg:<br><img src="https://github.com/nocannobbb/Pictures/raw/master/c%2B%2B%20big%20bucket.png" alt="for c++ big backet"></li>
+</ol>
 
       
     </div>
@@ -370,9 +405,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/test/" rel="tag"># test</a>
-          
-            <a href="/tags/excitement/" rel="tag"># excitement</a>
+            <a href="/tags/c-%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag"># c++, 多线程</a>
           
         </div>
       
@@ -385,15 +418,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2020/06/15/mytest2/" rel="next" title="test for markdown">
+                <i class="fa fa-chevron-left"></i> test for markdown
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/15/mytest2/" rel="prev" title="test for markdown">
-                test for markdown <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -445,8 +478,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -510,6 +552,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何编写c-版本的线程池"><span class="nav-number">1.</span> <span class="nav-text">如何编写c++版本的线程池</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、c-基础知识"><span class="nav-number">1.1.</span> <span class="nav-text">一、c++基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#匿名函数-lamda"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">匿名函数(lamda)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大括号"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">大括号</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
